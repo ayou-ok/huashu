@@ -1,0 +1,8 @@
+{
+  "name": "huashu",
+  "version": "1.0.0",
+  "main": "index.ts",
+  "repository": "git@github.com:ayou-ok/huashu.git",
+  "author": "阿佑 <ayooooo@petalmail.com>",
+  "license": "GPL"
+}
