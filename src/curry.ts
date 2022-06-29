@@ -27,7 +27,7 @@ function _curryN (required: number, receieved: any[], fn: AnyFunction): AnyFunct
     let argIndex = 0
 
     while (combindIndex < receieved.length || argIndex < arguments.length) {
-      let param: any
+      let argument: any
 
       /**
        * 利用arguments替换received中的placeholder
@@ -36,15 +36,15 @@ function _curryN (required: number, receieved: any[], fn: AnyFunction): AnyFunct
         combindIndex < receieved.length &&
         (!isPlaceholder(receieved[combindIndex]) || argIndex >= arguments.length)
       ) {
-        param = receieved[combindIndex]
+        argument = receieved[combindIndex]
       } else {
-        param = arguments[argIndex]
+        argument = arguments[argIndex]
         argIndex++
       }
 
-      combind[combindIndex] = param
+      combind[combindIndex] = argument
 
-      if (!isPlaceholder(param)) {
+      if (!isPlaceholder(argument)) {
         left--
       }
 
@@ -52,7 +52,7 @@ function _curryN (required: number, receieved: any[], fn: AnyFunction): AnyFunct
     }
 
     if (left <= 0) return fn(...combind)
-    return _curryN(left, combind, fn)
+    return _curryN(required, combind, fn)
   }
 }
 
