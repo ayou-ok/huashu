@@ -1,1 +1,1 @@
-export * from './measureText'
+export * from './src/measureText'

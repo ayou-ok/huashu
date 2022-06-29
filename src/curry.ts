@@ -15,8 +15,11 @@ type AnyFunction = (...args: any[]) => any
  * @param fn 柯里化函数对象
  * @returns 
  */
-function _curryN (required: number, receieved: any[], fn: AnyFunction) {
-  return () => {
+function _curryN (required: number, receieved: any[], fn: AnyFunction): AnyFunction {
+  return function () {
+    /**
+     * 该数组中可能存在placeholder元素
+     */
     const combind: any[] = []
 
     let left = required
@@ -53,41 +56,9 @@ function _curryN (required: number, receieved: any[], fn: AnyFunction) {
   }
 }
 
-function curry1 (fn: AnyFunction) {
-  return function f1 (a: any) {
-    if (arguments.length === 0 || isPlaceholder(a)) {
-      return f1
-    }
-    return fn(...[].slice.call(arguments))
-  }
-}
-
-function curry2 (fn: AnyFunction) {
-  return function f2 (a0: any, a1: any) {
-    switch (arguments.length) {
-      case 0:
-        return f2
-      case 1:
-        return isPlaceholder(a0) ?
-          f2 :
-          curry1((a1: any) => fn(a0, a1))
-      default:
-        return fn()
-    }
-  }
-}
-
-export const curryN2 = curry2((required: number, fn: AnyFunction) => {
-  if (required === 1) {
-    return curry1(fn)
-  }
-
-  return _curryN(length, [], fn)
-})
-
 export const curryN = _curryN(2, [], (required: number, fn: AnyFunction) => _curryN(required, [], fn))
 
-function curry (fn) {
+function curry (fn: AnyFunction) {
   return _curryN(fn.length, [], fn)
 }
 
