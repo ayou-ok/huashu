@@ -1,2 +1,2 @@
-# huashu(画数) aka: graphic mathmatic
-画术-画图相关的数据计算
+# huashu(graphic mathmatic)
+画数-画图相关的数据计算
